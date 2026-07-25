@@ -1,8 +1,14 @@
 -- Prime — Trigger de onboarding (03-backend.md)
 -- Al crear un usuario nuevo: 4 áreas por defecto + su fila de perfil.
+-- La función fija search_path y revoca EXECUTE a los roles expuestos por la API
+-- (hardening recomendado por los advisors de Supabase para SECURITY DEFINER).
 
 create or replace function public.handle_new_user()
-returns trigger as $$
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
 begin
   insert into public.areas (user_id, nombre, orden) values
     (new.id, 'Físico', 0),
@@ -14,7 +20,11 @@ begin
 
   return new;
 end;
-$$ language plpgsql security definer;
+$$;
+
+revoke execute on function public.handle_new_user() from public;
+revoke execute on function public.handle_new_user() from anon;
+revoke execute on function public.handle_new_user() from authenticated;
 
 drop trigger if exists on_auth_user_created on auth.users;
 

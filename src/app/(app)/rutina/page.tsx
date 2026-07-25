@@ -1,10 +1,20 @@
-import { Placeholder } from "@/components/ui/Placeholder";
+import { RutinaClient } from "@/components/rutina/RutinaClient";
+import { createClient } from "@/lib/supabase/server";
 
-export default function RutinaPage() {
+export default async function RutinaPage() {
+  const supabase = await createClient();
+
+  const [areasRes, bloquesRes, habitosRes] = await Promise.all([
+    supabase.from("areas").select("*").order("orden"),
+    supabase.from("rutina_bloques").select("*").order("hora_inicio"),
+    supabase.from("habitos").select("*").eq("activo", true).order("created_at"),
+  ]);
+
   return (
-    <Placeholder
-      titulo="Rutina"
-      descripcion="Editor de bloques semanales y objetivos sin horario fijo. Llega en el Día 2."
+    <RutinaClient
+      areas={areasRes.data ?? []}
+      bloques={bloquesRes.data ?? []}
+      habitos={habitosRes.data ?? []}
     />
   );
 }
