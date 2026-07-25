@@ -5,8 +5,7 @@ import {
   IconLink,
   IconPlus,
 } from "@tabler/icons-react";
-import { useState, useTransition } from "react";
-import { copiarDiaALaboral } from "@/actions/rutina";
+import { useState } from "react";
 import { areaSlug } from "@/lib/areas";
 import {
   addDays,
@@ -18,6 +17,7 @@ import {
 import type { Area, Habito, RutinaBloque } from "@/lib/types";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { BlockModal } from "./BlockModal";
+import { CopyDayModal } from "./CopyDayModal";
 import { HabitModal } from "./HabitModal";
 
 type ModalState =
@@ -25,6 +25,7 @@ type ModalState =
   | { tipo: "bloque-editar"; bloque: RutinaBloque }
   | { tipo: "habito-nuevo" }
   | { tipo: "habito-editar"; habito: Habito }
+  | { tipo: "copiar" }
   | null;
 
 function metaTexto(h: Habito): string {
@@ -45,7 +46,6 @@ export function RutinaClient({
   const hoy = new Date();
   const [selectedDia, setSelectedDia] = useState(getDiaSemana(hoy));
   const [modal, setModal] = useState<ModalState>(null);
-  const [pending, startTransition] = useTransition();
 
   const lunes = startOfWeek(hoy);
   const areaById = new Map(areas.map((a) => [a.id, a]));
@@ -59,33 +59,16 @@ export function RutinaClient({
 
   const objetivos = habitos.filter((h) => h.bloque_id == null);
 
-  function copiar() {
-    if (
-      !confirm(
-        "Se van a reemplazar los bloques de lunes a viernes con los del día seleccionado. ¿Seguir?",
-      )
-    )
-      return;
-    startTransition(async () => {
-      try {
-        await copiarDiaALaboral(selectedDia);
-      } catch (e) {
-        alert(e instanceof Error ? e.message : "Error al copiar.");
-      }
-    });
-  }
-
   return (
     <>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-[18px] font-medium">Rutina</h1>
         <button
           type="button"
-          onClick={copiar}
-          disabled={pending}
-          className="text-[12px] text-accent disabled:opacity-60"
+          onClick={() => setModal({ tipo: "copiar" })}
+          className="text-[12px] text-accent"
         >
-          {pending ? "Copiando…" : "Copiar a L–V"}
+          Copiar día
         </button>
       </div>
 
@@ -267,6 +250,9 @@ export function RutinaClient({
           habito={modal.habito}
           onClose={() => setModal(null)}
         />
+      ) : null}
+      {modal?.tipo === "copiar" ? (
+        <CopyDayModal diaOrigen={selectedDia} onClose={() => setModal(null)} />
       ) : null}
     </>
   );

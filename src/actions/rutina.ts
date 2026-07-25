@@ -55,9 +55,17 @@ export async function eliminarBloque(id: string): Promise<void> {
   revalidar();
 }
 
-/** Copia los bloques del día origen a lunes–viernes, reemplazando lo que hubiera. */
-export async function copiarDiaALaboral(diaOrigen: number): Promise<void> {
+/** Copia los bloques del día origen a los días destino, reemplazando lo que hubiera. */
+export async function copiarDiaA(
+  diaOrigen: number,
+  diasDestino: number[],
+): Promise<void> {
   const { supabase, userId } = await ctx();
+
+  const destinos = [...new Set(diasDestino)].filter(
+    (d) => d !== diaOrigen && d >= 0 && d <= 6,
+  );
+  if (destinos.length === 0) return;
 
   const { data: origen, error: e1 } = await supabase
     .from("rutina_bloques")
@@ -65,16 +73,15 @@ export async function copiarDiaALaboral(diaOrigen: number): Promise<void> {
     .eq("dia_semana", diaOrigen);
   if (e1) throw new Error(e1.message);
 
-  const destino = [0, 1, 2, 3, 4].filter((d) => d !== diaOrigen);
-
+  // Reemplazo: borra lo que hubiera en los días destino.
   const { error: e2 } = await supabase
     .from("rutina_bloques")
     .delete()
-    .in("dia_semana", destino);
+    .in("dia_semana", destinos);
   if (e2) throw new Error(e2.message);
 
   const copias = (origen ?? []).flatMap((b) =>
-    destino.map((d) => ({
+    destinos.map((d) => ({
       user_id: userId,
       dia_semana: d,
       hora_inicio: b.hora_inicio,

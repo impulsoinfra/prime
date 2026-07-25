@@ -2,7 +2,6 @@ import Link from "next/link";
 import { LandingNav } from "@/components/landing/LandingNav";
 import { PrimeSequence } from "@/components/landing/PrimeSequence";
 import { ScrollReveal } from "@/components/landing/ScrollReveal";
-import { WaitlistForm } from "@/components/landing/WaitlistForm";
 import { PrimeMark } from "@/components/ui/PrimeMark";
 
 export default function LandingPage() {
@@ -222,7 +221,9 @@ export default function LandingPage() {
       <section className="final-cta">
         <h2 className="reveal">Tu prime empieza el día que decidís medirlo.</h2>
         <div className="reveal reveal-delay-1">
-          <WaitlistForm />
+          <Link href="/signup" className="btn-primary">
+            Crear mi cuenta gratis
+          </Link>
         </div>
       </section>
 
