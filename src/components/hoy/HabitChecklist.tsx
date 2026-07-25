@@ -2,7 +2,6 @@
 
 import {
   IconCheck,
-  IconLink,
   IconPlayerPause,
   IconPlayerPlay,
   IconPlus,
@@ -134,12 +133,7 @@ function HabitRow({
           ) : null}
         </button>
         <Dot />
-        <p className="flex flex-1 items-center gap-1 text-[13px]">
-          {h.nombre}
-          {h.vinculado ? (
-            <IconLink size={12} className="text-fg-muted" aria-hidden />
-          ) : null}
-        </p>
+        <p className="flex-1 text-[13px]">{h.nombre}</p>
       </div>
     );
   }
@@ -166,14 +160,9 @@ function HabitRow({
     <div className={rowClass}>
       <Dot />
       <div className="min-w-0 flex-1">
-        <p className="mb-1.5 flex items-center gap-1 text-[13px]">
-          <span className="truncate">
-            {h.nombre} · {formatNum(display)} / {formatNum(h.meta)}
-            {h.unidad ? ` ${h.unidad}` : ""}
-          </span>
-          {h.vinculado ? (
-            <IconLink size={12} className="shrink-0 text-fg-muted" aria-hidden />
-          ) : null}
+        <p className="mb-1.5 truncate text-[13px]">
+          {h.nombre} · {formatNum(display)} / {formatNum(h.meta)}
+          {h.unidad ? ` ${h.unidad}` : ""}
         </p>
         <div className="h-[5px] overflow-hidden rounded-full bg-border">
           <div

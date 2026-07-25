@@ -17,9 +17,9 @@ export function MetricsRow({
   const subeSemana = semanal.delta >= 0;
 
   return (
-    <div className="mb-5 grid grid-cols-2 gap-2.5 md:grid-cols-3">
-      {/* Progreso diario — métrica hero */}
-      <div className="col-span-2 rounded-[12px] border-2 border-accent bg-surface-1 p-3.5 md:col-span-1">
+    <div className="mb-5 flex flex-col gap-2.5 md:flex-row">
+      {/* Progreso diario — métrica hero (ancho completo en mobile) */}
+      <div className="rounded-[12px] border-2 border-accent bg-surface-2 p-3.5 md:flex-1">
         <p className="mb-1 text-[11px] text-fg-secondary">Progreso diario</p>
         <p className="font-voice text-[26px] font-medium leading-none">
           {progreso.cumplidos}
@@ -36,40 +36,41 @@ export function MetricsRow({
         </div>
       </div>
 
-      {/* Racha actual */}
-      <div className="rounded-[12px] border border-border bg-surface-2 p-3.5">
-        <p className="mb-1 flex items-center gap-1 text-[11px] text-fg-secondary">
-          <IconFlame size={12} className="text-warning" aria-hidden />
-          Racha actual
-        </p>
-        <p className="font-voice text-[26px] font-medium leading-none">
-          {racha.actual}
-          <span className="font-sans text-[13px] text-fg-muted"> días</span>
-        </p>
-        <p className="mt-2 text-[11px] text-fg-muted">
-          Mejor racha: {racha.mejor} días
-        </p>
-      </div>
+      {/* Racha + Esta semana */}
+      <div className="grid grid-cols-2 gap-2.5 md:flex md:flex-[2]">
+        <div className="rounded-[12px] border border-border bg-surface-2 p-3.5 md:flex-1">
+          <p className="mb-1 flex items-center gap-1 text-[11px] text-fg-secondary">
+            <IconFlame size={12} className="text-warning" aria-hidden />
+            Racha actual
+          </p>
+          <p className="font-voice text-[26px] font-medium leading-none">
+            {racha.actual}
+            <span className="font-sans text-[13px] text-fg-muted"> días</span>
+          </p>
+          <p className="mt-2 text-[11px] text-fg-muted">
+            Mejor racha: {racha.mejor} días
+          </p>
+        </div>
 
-      {/* Cumplimiento semanal */}
-      <div className="rounded-[12px] border border-border bg-surface-2 p-3.5">
-        <p className="mb-1 text-[11px] text-fg-secondary">Esta semana</p>
-        <p className="font-voice text-[26px] font-medium leading-none">
-          {semanal.pct}%
-        </p>
-        <p
-          className={`mt-2 flex items-center gap-0.5 text-[11px] ${
-            subeSemana ? "text-success" : "text-fg-muted"
-          }`}
-        >
-          {subeSemana ? (
-            <IconTrendingUp size={12} aria-hidden />
-          ) : (
-            <IconTrendingDown size={12} aria-hidden />
-          )}
-          {subeSemana ? "+" : ""}
-          {semanal.delta} pts
-        </p>
+        <div className="rounded-[12px] border border-border bg-surface-2 p-3.5 md:flex-1">
+          <p className="mb-1 text-[11px] text-fg-secondary">Esta semana</p>
+          <p className="font-voice text-[26px] font-medium leading-none">
+            {semanal.pct}%
+          </p>
+          <p
+            className={`mt-2 flex items-center gap-0.5 text-[11px] ${
+              subeSemana ? "text-success" : "text-fg-muted"
+            }`}
+          >
+            {subeSemana ? (
+              <IconTrendingUp size={12} aria-hidden />
+            ) : (
+              <IconTrendingDown size={12} aria-hidden />
+            )}
+            {subeSemana ? "+" : ""}
+            {semanal.delta} pts
+          </p>
+        </div>
       </div>
     </div>
   );

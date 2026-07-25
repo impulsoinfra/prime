@@ -21,7 +21,7 @@ export default async function AppLayout({
   return (
     <div className="min-h-dvh md:flex">
       <Sidebar nombre={nombre} email={email} />
-      <div className="min-w-0 flex-1 pb-24 md:pb-0">
+      <div className="min-w-0 flex-1 overflow-x-hidden pb-24 md:pb-0">
         <div className="mx-auto max-w-[1120px] px-4 py-5 md:px-8 md:py-8">
           {children}
         </div>

@@ -35,7 +35,6 @@ export type HabitoVM = {
   unidad: string | null;
   incrementoRapido: number | null;
   areaSlug: AreaSlug;
-  vinculado: boolean;
   valor: number;
   cumplido: boolean;
 };
@@ -111,7 +110,6 @@ export function buildHoy(input: {
         unidad: h.unidad,
         incrementoRapido: h.incremento_rapido,
         areaSlug: slug,
-        vinculado: h.bloque_id != null,
         valor,
         cumplido: isCumplido(h, valor),
       };

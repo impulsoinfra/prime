@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  IconChevronRight,
-  IconLink,
-  IconPlus,
-} from "@tabler/icons-react";
+import { IconChevronRight, IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
 import { areaSlug } from "@/lib/areas";
 import {
@@ -49,9 +45,6 @@ export function RutinaClient({
 
   const lunes = startOfWeek(hoy);
   const areaById = new Map(areas.map((a) => [a.id, a]));
-  const linkedBlockIds = new Set(
-    habitos.map((h) => h.bloque_id).filter((id): id is string => id != null),
-  );
 
   const bloquesDelDia = bloques
     .filter((b) => b.dia_semana === selectedDia)
@@ -117,7 +110,6 @@ export function RutinaClient({
               {bloquesDelDia.map((b) => {
                 const area = b.area_id ? areaById.get(b.area_id) : undefined;
                 const slug = area ? areaSlug(area) : null;
-                const linked = linkedBlockIds.has(b.id);
                 const horario = b.hora_fin
                   ? `${formatHora(b.hora_inicio)}–${formatHora(b.hora_fin)}`
                   : formatHora(b.hora_inicio);
@@ -137,13 +129,6 @@ export function RutinaClient({
                     <span className="min-w-0 flex-1">
                       <span className="flex items-center gap-1.5 text-[13px]">
                         {horario} · {b.titulo}
-                        {linked ? (
-                          <IconLink
-                            size={12}
-                            className="text-fg-muted"
-                            aria-label="Vinculado a un hábito"
-                          />
-                        ) : null}
                       </span>
                       {b.descripcion ? (
                         <span className="mt-0.5 block truncate text-[11px] text-fg-muted">
@@ -237,16 +222,11 @@ export function RutinaClient({
         />
       ) : null}
       {modal?.tipo === "habito-nuevo" ? (
-        <HabitModal
-          areas={areas}
-          bloques={bloques}
-          onClose={() => setModal(null)}
-        />
+        <HabitModal areas={areas} onClose={() => setModal(null)} />
       ) : null}
       {modal?.tipo === "habito-editar" ? (
         <HabitModal
           areas={areas}
-          bloques={bloques}
           habito={modal.habito}
           onClose={() => setModal(null)}
         />

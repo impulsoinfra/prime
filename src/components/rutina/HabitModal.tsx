@@ -8,11 +8,10 @@ import {
   type HabitoInput,
 } from "@/actions/habitos";
 import { areaSlug } from "@/lib/areas";
-import { DIAS_CORTOS, formatHora } from "@/lib/date";
-import type { Area, Habito, RutinaBloque } from "@/lib/types";
+import { DIAS_CORTOS } from "@/lib/date";
+import type { Area, Habito } from "@/lib/types";
 import { Field, Label, inputClass, selectClass } from "@/components/ui/form";
 import { Modal } from "@/components/ui/Modal";
-import { Toggle } from "@/components/ui/Toggle";
 
 const TIPOS = [
   { value: "booleano", label: "Sí / no" },
@@ -36,12 +35,10 @@ const UNIDADES = [
 
 export function HabitModal({
   areas,
-  bloques,
   habito,
   onClose,
 }: {
   areas: Area[];
-  bloques: RutinaBloque[];
   habito?: Habito | null;
   onClose: () => void;
 }) {
@@ -57,8 +54,6 @@ export function HabitModal({
   const [frecuencia, setFrecuencia] = useState<number[]>(
     habito?.frecuencia ?? [0, 1, 2, 3, 4, 5, 6],
   );
-  const [vincular, setVincular] = useState(!!habito?.bloque_id);
-  const [bloqueId, setBloqueId] = useState(habito?.bloque_id ?? "");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -90,7 +85,7 @@ export function HabitModal({
       unidad: conMeta ? unidad : null,
       incremento_rapido: conMeta && incremento ? Number(incremento) : null,
       frecuencia,
-      bloque_id: vincular && bloqueId ? bloqueId : null,
+      bloque_id: null,
     };
 
     startTransition(async () => {
@@ -239,37 +234,6 @@ export function HabitModal({
               );
             })}
           </div>
-        </div>
-
-        <div className="rounded-[12px] bg-surface-2 p-3">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <p className="text-[13px]">Vincular a bloque de rutina</p>
-              <p className="mt-0.5 text-[11px] text-fg-muted">
-                Opcional · se marca al completar el bloque
-              </p>
-            </div>
-            <Toggle
-              checked={vincular}
-              onChange={setVincular}
-              label="Vincular a bloque de rutina"
-            />
-          </div>
-          {vincular ? (
-            <select
-              className={`${selectClass} mt-3`}
-              value={bloqueId}
-              onChange={(e) => setBloqueId(e.target.value)}
-            >
-              <option value="">Elegí un bloque…</option>
-              {bloques.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {DIAS_CORTOS[b.dia_semana]} {formatHora(b.hora_inicio)} ·{" "}
-                  {b.titulo}
-                </option>
-              ))}
-            </select>
-          ) : null}
         </div>
 
         {error ? <p className="text-[12px] text-danger">{error}</p> : null}
