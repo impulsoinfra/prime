@@ -22,8 +22,8 @@ export type BloqueInput = {
 };
 
 function revalidar() {
-  revalidatePath("/rutina");
-  revalidatePath("/");
+  revalidatePath("/app/rutina");
+  revalidatePath("/app");
 }
 
 export async function crearBloque(input: BloqueInput): Promise<void> {

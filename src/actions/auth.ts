@@ -29,7 +29,7 @@ export async function signIn(
   if (error) return { error: traducirError(error.message) };
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/app");
 }
 
 export async function signUp(
@@ -58,7 +58,7 @@ export async function signUp(
   }
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect("/app");
 }
 
 export async function signOut(): Promise<void> {

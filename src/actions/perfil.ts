@@ -23,7 +23,7 @@ export async function actualizarPerfil(patch: {
     .update({ ...patch, updated_at: new Date().toISOString() })
     .eq("user_id", userId);
   if (error) throw new Error(error.message);
-  revalidatePath("/perfil");
+  revalidatePath("/app/perfil");
 }
 
 export async function actualizarNombre(nombre: string): Promise<void> {

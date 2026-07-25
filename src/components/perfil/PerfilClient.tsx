@@ -83,7 +83,7 @@ export function PerfilClient({
       <SectionTitle>General</SectionTitle>
       <div className="mb-6">
         <Link
-          href="/rutina"
+          href="/app/rutina"
           className="flex items-center gap-2.5 border-t border-border py-2.5"
         >
           <IconApps size={16} className="text-fg-secondary" aria-hidden />

@@ -150,6 +150,24 @@ export interface Database {
         };
         Relationships: [];
       };
+      waitlist: {
+        Row: {
+          id: string;
+          email: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          email: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          email?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
       perfiles: {
         Row: {
           user_id: string;

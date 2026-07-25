@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>prime — sistema de logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14120F; --ink-2: #1C1913;
+    --paper: #F2EDE4; --paper-2: #E7DFD0;
+    --mist: #948E80; --mist-dim: #5C5848;
+    --coral: #D85A30; --violet: #7F77DD; --teal: #1D9E75; --amber: #BA7517;
+    --line: rgba(20,18,15,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; padding: 60px 24px 100px; }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .kicker { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mist-dim); margin-bottom: 8px; }
+  h1.page-title { font-family: 'Fraunces', serif; font-weight: 500; font-size: 34px; margin-bottom: 60px; letter-spacing: -0.01em; }
+
+  section { margin-bottom: 64px; }
+  h2.sec { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mist-dim); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+
+  /* mark */
+  .mark { display: inline-block; }
+  .mark svg { display: block; }
+
+  /* lockup */
+  .lockup { display: inline-flex; align-items: center; gap: 14px; }
+  .lockup .mark svg { width: 44px; height: 44px; }
+  .lockup .word { font-family: 'Fraunces', serif; font-weight: 500; font-size: 40px; letter-spacing: -0.01em; }
+
+  .stage { border-radius: 20px; padding: 70px; display: flex; align-items: center; justify-content: center; }
+  .stage-dark { background: var(--ink); }
+  .stage-dark .word { color: var(--paper); }
+  .stage-light { background: var(--paper-2); border: 1px solid var(--line); }
+  .stage-light .word { color: var(--ink); }
+  .stage-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .stage-row { grid-template-columns: 1fr; } }
+
+  /* icon tiles */
+  .icon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 640px) { .icon-grid { grid-template-columns: repeat(2, 1fr); } }
+  .icon-tile { aspect-ratio: 1; border-radius: 22%; display: flex; align-items: center; justify-content: center; }
+  .icon-tile svg { width: 46%; height: 46%; }
+  .icon-tile .cap { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--mist-dim); margin-top: 10px; }
+  .tile-wrap { display: flex; flex-direction: column; }
+  .it-ink { background: var(--ink); }
+  .it-paper { background: var(--paper-2); border: 1px solid var(--line); }
+  .it-coral { background: var(--coral); }
+  .it-gradient { background: linear-gradient(135deg, var(--coral), var(--violet) 40%, var(--teal) 70%, var(--amber)); }
+
+  /* size scale */
+  .scale-row { display: flex; align-items: flex-end; gap: 40px; background: var(--ink); border-radius: 20px; padding: 50px; flex-wrap: wrap; }
+  .scale-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .scale-item .cap { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--mist); }
+  .scale-box { background: var(--ink-2); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+
+  /* mono versions */
+  .mono-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .mono-row { grid-template-columns: 1fr; } }
+  .mono-stage { border-radius: 20px; padding: 60px; display: flex; align-items: center; justify-content: center; gap: 40px; }
+  .mono-stage.on-dark { background: var(--ink); }
+  .mono-stage.on-color { background: var(--teal); }
+
+  /* clear space */
+  .space-demo { background: var(--paper-2); border: 1px solid var(--line); border-radius: 20px; padding: 60px; display: flex; align-items: center; justify-content: center; }
+  .space-box { position: relative; padding: 32px; border: 1px dashed var(--mist); }
+  .space-box::before, .space-box::after { content: 'x'; position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--mist-dim); }
+  .space-box::before { top: 8px; left: 50%; transform: translateX(-50%); }
+  .space-box::after { bottom: 8px; left: 50%; transform: translateX(-50%); }
+
+  /* palette */
+  .palette { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  @media (max-width: 640px) { .palette { grid-template-columns: repeat(3, 1fr); } }
+  .swatch { border-radius: 12px; aspect-ratio: 1; margin-bottom: 8px; }
+  .swatch-label { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--mist-dim); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">sistema de marca</div>
+  <h1 class="page-title">prime — logo y variantes</h1>
+
+  <!-- primary lockup -->
+  <section>
+    <h2 class="sec">lockup principal</h2>
+    <div class="stage-row">
+      <div class="stage stage-dark">
+        <div class="lockup">
+          <span class="mark">
+            <svg viewBox="0 0 100 100"><polygon points="24,78 76,78 50,18" fill="var(--coral)"/><circle cx="50" cy="9" r="5" fill="var(--paper)"/></svg>
+          </span>
+          <span class="word">prime</span>
+        </div>
+      </div>
+      <div class="stage stage-light">
+        <div class="lockup">
+          <span class="mark">
+            <svg viewBox="0 0 100 100"><polygon points="24,78 76,78 50,18" fill="var(--ink)"/><circle cx="50" cy="9" r="5" fill="var(--coral)"/></svg>
+          </span>
+          <span class="word">prime</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- icon only -->
+  <section>
+    <h2 class="sec">ícono solo — favicon, avatar, app icon</h2>
+    <div class="icon-grid">
+      <div class="tile-wrap">
+        <div class="icon-tile it-ink"><svg viewBox="0 0 100 100"><polygon points="24,78 76,78 50,18" fill="var(--paper)"/><circle cx="50" cy="9" r="5" fill="var(--coral)"/></svg></div>
+        <div class="cap">sobre tinta</div>
+      </div>
+      <div class="tile-wrap">
+        <div class="icon-tile it-paper"><svg viewBox="0 0 100 100"><polygon points="24,78 76,78 50,18" fill="var(--ink)"/><circle cx="50" cy="9" r="5" fill="var(--coral)"/></svg></div>
+        <div class="cap">sobre papel</div>
+      </div>
+      <div class="tile-wrap">
+        <div class="icon-tile it-coral"><svg viewBox="0 0 100 100"><polygon points="24,78 76,78 50,18" fill="var(--paper)"/><circle cx="50" cy="9" r="5" fill="var(--ink)"/></svg></div>
+        <div class="cap">sobre coral</div>
+      </div>
+      <div class="tile-wrap">
+        <div class="icon-tile it-gradient"><svg viewBox="0 0 100 100"><polygon points="24,78 76,78 50,18" fill="var(--paper)"/><circle cx="50" cy="9" r="5" fill="var(--ink)"/></svg></div>
+        <div class="cap">edición especial</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- size scale -->
+  <section>
+    <h2 class="sec">legibilidad a distintos tamaños</h2>
+    <div class="scale-row">
+      <div class="scale-item">
+        <div class="scale-box" style="width:96px;height:96px;"><svg viewBox="0 0 100 100" width="56" height="56"><polygon points="24,78 76,78 50,18" fill="var(--coral)"/><circle cx="50" cy="9" r="5" fill="var(--paper)"/></svg></div>
+        <span class="cap">96px</span>
+      </div>
+      <div class="scale-item">
+        <div class="scale-box" style="width:64px;height:64px;"><svg viewBox="0 0 100 100" width="36" height="36"><polygon points="24,78 76,78 50,18" fill="var(--coral)"/><circle cx="50" cy="9" r="5" fill="var(--paper)"/></svg></div>
+        <span class="cap">64px</span>
+      </div>
+      <div class="scale-item">
+        <div class="scale-box" style="width:40px;height:40px;"><svg viewBox="0 0 100 100" width="22" height="22"><polygon points="24,78 76,78 50,18" fill="var(--coral)"/></svg></div>
+        <span class="cap">40px · sin punto</span>
+      </div>
+      <div class="scale-item">
+        <div class="scale-box" style="width:24px;height:24px;"><svg viewBox="0 0 100 100" width="13" height="13"><polygon points="24,78 76,78 50,18" fill="var(--coral)"/></svg></div>
+        <span class="cap">24px · sin punto</span>
+      </div>
+      <div class="scale-item">
+        <div class="scale-box" style="width:16px;height:16px;"><svg viewBox="0 0 100 100" width="9" height="9"><polygon points="24,78 76,78 50,18" fill="var(--coral)"/></svg></div>
+        <span class="cap">16px · favicon</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- monochrome -->
+  <section>
+    <h2 class="sec">versión de un solo color</h2>
+    <div class="mono-row">
+      <div class="mono-stage on-dark">
+        <svg viewBox="0 0 100 100" width="50" height="50"><polygon points="24,78 76,78 50,18" fill="var(--paper)"/><circle cx="50" cy="9" r="5" fill="var(--paper)"/></svg>
+        <span class="word mono" style="font-family:'Fraunces',serif;font-weight:500;font-size:32px;color:var(--paper);">prime</span>
+      </div>
+      <div class="mono-stage on-color">
+        <svg viewBox="0 0 100 100" width="50" height="50"><polygon points="24,78 76,78 50,18" fill="var(--ink)"/><circle cx="50" cy="9" r="5" fill="var(--ink)"/></svg>
+        <span class="word" style="font-family:'Fraunces',serif;font-weight:500;font-size:32px;color:var(--ink);">prime</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- clear space -->
+  <section>
+    <h2 class="sec">espacio libre mínimo</h2>
+    <div class="space-demo">
+      <div class="space-box">
+        <svg viewBox="0 0 100 100" width="60" height="60"><polygon points="24,78 76,78 50,18" fill="var(--coral)"/><circle cx="50" cy="9" r="5" fill="var(--ink)"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- palette -->
+  <section>
+    <h2 class="sec">paleta de marca</h2>
+    <div class="palette">
+      <div><div class="swatch" style="background:var(--ink)"></div><div class="swatch-label">ink · #14120F</div></div>
+      <div><div class="swatch" style="background:var(--paper)"></div><div class="swatch-label">paper · #F2EDE4</div></div>
+      <div><div class="swatch" style="background:var(--coral)"></div><div class="swatch-label">coral · #D85A30</div></div>
+      <div><div class="swatch" style="background:var(--violet)"></div><div class="swatch-label">violet · #7F77DD</div></div>
+      <div><div class="swatch" style="background:var(--teal)"></div><div class="swatch-label">teal · #1D9E75</div></div>
+      <div><div class="swatch" style="background:var(--amber)"></div><div class="swatch-label">amber · #BA7517</div></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

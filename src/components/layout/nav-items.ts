@@ -13,8 +13,8 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { href: "/", label: "Hoy", icon: IconHome },
-  { href: "/progreso", label: "Progreso", icon: IconChartBar },
-  { href: "/rutina", label: "Rutina", icon: IconCalendar },
-  { href: "/perfil", label: "Perfil", icon: IconUser },
+  { href: "/app", label: "Hoy", icon: IconHome },
+  { href: "/app/progreso", label: "Progreso", icon: IconChartBar },
+  { href: "/app/rutina", label: "Rutina", icon: IconCalendar },
+  { href: "/app/perfil", label: "Perfil", icon: IconUser },
 ];

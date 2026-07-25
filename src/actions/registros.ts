@@ -26,7 +26,7 @@ export async function setValor(habitoId: string, valor: number): Promise<void> {
     );
   if (error) throw new Error(error.message);
 
-  revalidatePath("/");
+  revalidatePath("/app");
 }
 
 /** Suma un incremento al valor de hoy (botón "+" de registro rápido). */
@@ -54,5 +54,5 @@ export async function incrementarValor(
     );
   if (error) throw new Error(error.message);
 
-  revalidatePath("/");
+  revalidatePath("/app");
 }

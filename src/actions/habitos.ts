@@ -24,8 +24,8 @@ export type HabitoInput = {
 };
 
 function revalidar() {
-  revalidatePath("/rutina");
-  revalidatePath("/");
+  revalidatePath("/app/rutina");
+  revalidatePath("/app");
 }
 
 export async function crearHabito(input: HabitoInput): Promise<void> {

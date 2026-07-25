@@ -6,7 +6,7 @@ import { NAV_ITEMS } from "./nav-items";
 import { UserChip } from "./UserChip";
 
 function isActive(pathname: string, href: string): boolean {
-  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  return href === "/app" ? pathname === "/app" : pathname.startsWith(href);
 }
 
 export function Sidebar({
