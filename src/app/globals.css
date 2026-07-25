@@ -38,6 +38,8 @@
   --text-warning: var(--warning);
   --text-accent: var(--accent);
   --bg-accent: var(--accent-bg);
+  --bg-success: #e7f6ec;
+  --bg-warning: #fbf0dd;
   --border-accent: var(--accent);
 
   /* Radios */
@@ -69,6 +71,8 @@
   /* El check sobre el verde brillante del modo oscuro necesita texto oscuro */
   --on-success: #0a2e16;
   --fill-control: #2c2b28;
+  --bg-success: #10331e;
+  --bg-warning: #3a2a0c;
 }
 
 /* ────────────────────────────────────────────────────────────────────────

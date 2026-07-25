@@ -38,6 +38,12 @@ export function formatFechaLarga(date: Date = new Date()): string {
   return `${DIAS[getDiaSemana(date)]} ${date.getDate()} de ${MESES[date.getMonth()]}`;
 }
 
+/** "Julio 2026" */
+export function mesAnioLabel(year: number, month: number): string {
+  const m = MESES[month];
+  return `${m.charAt(0).toUpperCase()}${m.slice(1)} ${year}`;
+}
+
 /** Saludo según la hora del día. */
 export function saludo(date: Date = new Date()): string {
   const h = date.getHours();
