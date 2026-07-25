@@ -1,0 +1,167 @@
+<style>
+.area-fisico{--c-bg:#FAECE7;--c-fg:#4A1B0C;--c-line:#D85A30}
+.area-mental{--c-bg:#EEEDFE;--c-fg:#26215C;--c-line:#7F77DD}
+.area-personal{--c-bg:#E1F5EE;--c-fg:#04342C;--c-line:#1D9E75}
+.area-laboral{--c-bg:#FAEEDA;--c-fg:#412402;--c-line:#BA7517}
+@media (prefers-color-scheme: dark){
+.area-fisico{--c-bg:#712B13;--c-fg:#F5C4B3;--c-line:#F0997B}
+.area-mental{--c-bg:#3C3489;--c-fg:#CECBF6;--c-line:#AFA9EC}
+.area-personal{--c-bg:#085041;--c-fg:#9FE1CB;--c-line:#5DCAA5}
+.area-laboral{--c-bg:#633806;--c-fg:#FAC775;--c-line:#EF9F27}
+}
+</style>
+<h2 class="sr-only">Dashboard mobile completo: saludo, métricas semanales, bloque actual de rutina, línea de tiempo del día, progreso por área y hábitos de hoy</h2>
+<div style="max-width:380px;margin:0 auto;background:var(--surface-1);border-radius:28px;border:0.5px solid var(--border);padding:20px 18px 24px;">
+
+<div style="margin-bottom:16px;">
+  <p style="font-size:13px;color:var(--text-secondary);margin:0 0 2px;">Viernes 24 de julio</p>
+  <p style="font-size:16px;font-weight:500;margin:0;">Hola, buenas tardes</p>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+  <div style="background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:12px;">
+    <p style="font-size:11px;color:var(--text-secondary);margin:0 0 4px;">Cumplimiento semanal</p>
+    <p style="font-family:var(--font-voice);font-size:28px;font-weight:500;margin:0;">78%</p>
+    <p style="font-size:11px;color:var(--text-success);margin:4px 0 0;display:flex;align-items:center;gap:2px;"><i class="ti ti-trending-up" style="font-size:12px" aria-hidden="true"></i>+6 vs. sem. pasada</p>
+  </div>
+  <div style="background:var(--surface-2);border:0.5px solid var(--border);border-radius:12px;padding:12px;">
+    <p style="font-size:11px;color:var(--text-secondary);margin:0 0 4px;display:flex;align-items:center;gap:4px;"><i class="ti ti-flame" style="font-size:12px;color:var(--text-warning)" aria-hidden="true"></i>Racha actual</p>
+    <p style="font-family:var(--font-voice);font-size:28px;font-weight:500;margin:0;">12<span style="font-size:14px;font-family:var(--font-sans)"> días</span></p>
+    <p style="font-size:11px;color:var(--text-muted);margin:4px 0 0;">Mejor racha: 19 días</p>
+  </div>
+</div>
+
+<div style="background:var(--surface-2);border:0.5px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+    <div style="display:flex;align-items:center;gap:6px;">
+      <i class="ti ti-clock" style="font-size:15px;color:var(--text-muted)" aria-hidden="true"></i>
+      <span style="font-size:12px;color:var(--text-secondary);">Ahora · 11:42</span>
+    </div>
+    <i class="ti ti-edit" style="font-size:16px;color:var(--text-muted)" aria-hidden="true"></i>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+    <div style="width:8px;height:36px;border-radius:4px;background:#BA7517;"></div>
+    <div>
+      <p style="font-size:16px;font-weight:500;margin:0;">Bloque de foco</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin:2px 0 0;">Trabajo · 9:00–13:30 · quedan 108 min</p>
+    </div>
+  </div>
+  <div style="height:5px;border-radius:3px;background:var(--border);overflow:hidden;margin-bottom:10px;">
+    <div style="height:100%;width:60%;border-radius:3px;background:#BA7517;"></div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid var(--border);padding-top:9px;">
+    <span style="font-size:12px;color:var(--text-muted);">A continuación</span>
+    <span style="font-size:13px;">13:30 · Almuerzo</span>
+  </div>
+</div>
+
+<p style="font-size:13px;font-weight:500;color:var(--text-secondary);margin:0 0 8px;">Tu día</p>
+<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:18px;">
+  <div style="flex-shrink:0;width:52px;text-align:center;">
+    <div style="height:3px;border-radius:2px;background:var(--border);margin-bottom:6px;"></div>
+    <i class="ti ti-sun" style="font-size:15px;color:var(--text-muted)" aria-hidden="true"></i>
+    <p style="font-size:10px;color:var(--text-muted);margin:4px 0 0;">8:00</p>
+  </div>
+  <div style="flex-shrink:0;width:52px;text-align:center;">
+    <div style="height:3px;border-radius:2px;background:#1D9E75;margin-bottom:6px;"></div>
+    <i class="ti ti-book" style="font-size:15px;color:#1D9E75" aria-hidden="true"></i>
+    <p style="font-size:10px;color:var(--text-muted);margin:4px 0 0;">8:00</p>
+  </div>
+  <div style="flex-shrink:0;width:60px;text-align:center;transform:scale(1.08);">
+    <div style="height:3px;border-radius:2px;background:#BA7517;margin-bottom:6px;"></div>
+    <i class="ti ti-briefcase" style="font-size:17px;color:#BA7517" aria-hidden="true"></i>
+    <p style="font-size:10px;font-weight:500;margin:4px 0 0;">9:00</p>
+  </div>
+  <div style="flex-shrink:0;width:52px;text-align:center;">
+    <div style="height:3px;border-radius:2px;background:var(--border);margin-bottom:6px;"></div>
+    <i class="ti ti-tools" style="font-size:15px;color:var(--text-muted)" aria-hidden="true"></i>
+    <p style="font-size:10px;color:var(--text-muted);margin:4px 0 0;">13:30</p>
+  </div>
+  <div style="flex-shrink:0;width:52px;text-align:center;">
+    <div style="height:3px;border-radius:2px;background:#D85A30;margin-bottom:6px;"></div>
+    <i class="ti ti-barbell" style="font-size:15px;color:#D85A30" aria-hidden="true"></i>
+    <p style="font-size:10px;color:var(--text-muted);margin:4px 0 0;">18:30</p>
+  </div>
+  <div style="flex-shrink:0;width:52px;text-align:center;">
+    <div style="height:3px;border-radius:2px;background:#D85A30;margin-bottom:6px;"></div>
+    <i class="ti ti-boxing" style="font-size:15px;color:#D85A30" aria-hidden="true"></i>
+    <p style="font-size:10px;color:var(--text-muted);margin:4px 0 0;">22:00</p>
+  </div>
+</div>
+
+<p style="font-size:13px;font-weight:500;color:var(--text-secondary);margin:0 0 8px;">Progreso por área</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+  <div class="area-fisico" style="background:var(--c-bg);border-radius:16px;padding:12px;">
+    <i class="ti ti-barbell" style="font-size:16px;color:var(--c-fg)" aria-hidden="true"></i>
+    <p style="font-size:13px;font-weight:500;color:var(--c-fg);margin:6px 0 8px;">Físico · 6/7</p>
+    <div style="display:flex;gap:3px;">
+      <div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line);opacity:0.25"></div>
+    </div>
+  </div>
+  <div class="area-mental" style="background:var(--c-bg);border-radius:16px;padding:12px;">
+    <i class="ti ti-brain" style="font-size:16px;color:var(--c-fg)" aria-hidden="true"></i>
+    <p style="font-size:13px;font-weight:500;color:var(--c-fg);margin:6px 0 8px;">Mental · 4/7</p>
+    <div style="display:flex;gap:3px;">
+      <div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line);opacity:0.25"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line);opacity:0.25"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line);opacity:0.25"></div>
+    </div>
+  </div>
+  <div class="area-personal" style="background:var(--c-bg);border-radius:16px;padding:12px;">
+    <i class="ti ti-heart" style="font-size:16px;color:var(--c-fg)" aria-hidden="true"></i>
+    <p style="font-size:13px;font-weight:500;color:var(--c-fg);margin:6px 0 8px;">Personal · 7/7</p>
+    <div style="display:flex;gap:3px;">
+      <div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div>
+    </div>
+  </div>
+  <div class="area-laboral" style="background:var(--c-bg);border-radius:16px;padding:12px;">
+    <i class="ti ti-briefcase" style="font-size:16px;color:var(--c-fg)" aria-hidden="true"></i>
+    <p style="font-size:13px;font-weight:500;color:var(--c-fg);margin:6px 0 8px;">Laboral · 3/7</p>
+    <div style="display:flex;gap:3px;">
+      <div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line)"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line);opacity:0.25"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line);opacity:0.25"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line);opacity:0.25"></div><div style="flex:1;height:4px;border-radius:2px;background:var(--c-line);opacity:0.25"></div>
+    </div>
+  </div>
+</div>
+
+<p style="font-size:13px;font-weight:500;color:var(--text-secondary);margin:0 0 4px;">Hábitos de hoy</p>
+<div>
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:0.5px solid var(--border);">
+    <div style="width:20px;height:20px;border-radius:50%;background:var(--fill-success);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-check" style="font-size:13px;color:var(--on-success)" aria-hidden="true"></i></div>
+    <span style="width:6px;height:6px;border-radius:50%;background:#D85A30;flex-shrink:0;"></span>
+    <p style="font-size:13px;margin:0;flex:1;">Dormir 8 horas</p>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:0.5px solid var(--border);">
+    <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border-strong);flex-shrink:0;"></div>
+    <span style="width:6px;height:6px;border-radius:50%;background:#7F77DD;flex-shrink:0;"></span>
+    <p style="font-size:13px;margin:0;flex:1;">Meditar 10 min</p>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:0.5px solid var(--border);">
+    <div style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border-strong);flex-shrink:0;"></div>
+    <span style="width:6px;height:6px;border-radius:50%;background:#1D9E75;flex-shrink:0;"></span>
+    <p style="font-size:13px;margin:0;flex:1;">Leer 20 páginas</p>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);">
+    <div style="width:20px;height:20px;border-radius:50%;background:var(--fill-success);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="ti ti-check" style="font-size:13px;color:var(--on-success)" aria-hidden="true"></i></div>
+    <span style="width:6px;height:6px;border-radius:50%;background:#BA7517;flex-shrink:0;"></span>
+    <p style="font-size:13px;margin:0;flex:1;">Tarea de estudio</p>
+  </div>
+</div>
+
+<div style="display:flex;justify-content:space-around;margin-top:18px;padding-top:14px;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--text-accent);">
+    <i class="ti ti-home" style="font-size:20px" aria-hidden="true"></i>
+    <span style="font-size:11px;">Hoy</span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--text-muted);">
+    <i class="ti ti-chart-bar" style="font-size:20px" aria-hidden="true"></i>
+    <span style="font-size:11px;">Progreso</span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--text-muted);">
+    <i class="ti ti-calendar" style="font-size:20px" aria-hidden="true"></i>
+    <span style="font-size:11px;">Rutina</span>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--text-muted);">
+    <i class="ti ti-user" style="font-size:20px" aria-hidden="true"></i>
+    <span style="font-size:11px;">Perfil</span>
+  </div>
+</div>
+
+</div>

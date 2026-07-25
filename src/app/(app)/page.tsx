@@ -1,0 +1,64 @@
+import { AhoraCard } from "@/components/hoy/AhoraCard";
+import { AreaProgressGrid } from "@/components/hoy/AreaProgressGrid";
+import { DayTimeline } from "@/components/hoy/DayTimeline";
+import { Greeting } from "@/components/hoy/Greeting";
+import { HabitChecklist } from "@/components/hoy/HabitChecklist";
+import { MetricsRow } from "@/components/hoy/MetricsRow";
+import { SectionTitle } from "@/components/ui/SectionTitle";
+import { addDays, getDiaSemana, toISODate } from "@/lib/date";
+import { buildHoy } from "@/lib/hoy";
+import { createClient } from "@/lib/supabase/server";
+
+export default async function HoyPage() {
+  const supabase = await createClient();
+  const hoy = new Date();
+  const dia = getDiaSemana(hoy);
+  const desde = toISODate(addDays(hoy, -40)); // ventana para métricas/rachas
+
+  const [areasRes, habitosRes, registrosRes, bloquesRes] = await Promise.all([
+    supabase.from("areas").select("*").order("orden"),
+    supabase.from("habitos").select("*").eq("activo", true).order("created_at"),
+    supabase.from("registros").select("*").gte("fecha", desde),
+    supabase
+      .from("rutina_bloques")
+      .select("*")
+      .eq("dia_semana", dia)
+      .order("hora_inicio"),
+  ]);
+
+  const vm = buildHoy({
+    areas: areasRes.data ?? [],
+    habitos: habitosRes.data ?? [],
+    registros: registrosRes.data ?? [],
+    bloques: bloquesRes.data ?? [],
+    hoy,
+  });
+
+  return (
+    <>
+      <Greeting />
+      <MetricsRow
+        progreso={vm.progreso}
+        racha={vm.racha}
+        semanal={vm.semanal}
+      />
+
+      <div className="mb-5 grid gap-5 lg:grid-cols-[1.2fr_1fr]">
+        <div>
+          <div className="mb-4">
+            <AhoraCard bloques={vm.bloques} serverNowMin={vm.serverNowMin} />
+          </div>
+          <SectionTitle>Tu día</SectionTitle>
+          <DayTimeline bloques={vm.bloques} nowMin={vm.serverNowMin} />
+        </div>
+        <div>
+          <SectionTitle>Progreso por área</SectionTitle>
+          <AreaProgressGrid areas={vm.areas} />
+        </div>
+      </div>
+
+      <SectionTitle>Hábitos de hoy</SectionTitle>
+      <HabitChecklist habitos={vm.habitos} />
+    </>
+  );
+}

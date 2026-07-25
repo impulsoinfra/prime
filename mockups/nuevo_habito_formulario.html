@@ -1,0 +1,66 @@
+<h2 class="sr-only">Formulario para crear un nuevo hábito con nombre, área, tipo, meta numérica, frecuencia y vínculo opcional a un bloque de rutina</h2>
+<div style="max-width:380px;margin:0 auto;background:var(--surface-1);border-radius:24px 24px 0 0;border:0.5px solid var(--border);padding:18px 18px 22px;">
+
+<div style="width:36px;height:4px;border-radius:2px;background:var(--border-strong);margin:0 auto 16px;"></div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+  <p style="font-size:16px;font-weight:500;margin:0;">Nuevo hábito</p>
+  <i class="ti ti-x" style="font-size:18px;color:var(--text-muted)" aria-hidden="true"></i>
+</div>
+
+<p style="font-size:12px;color:var(--text-secondary);margin:0 0 6px;">Nombre</p>
+<input type="text" value="Leer 20 páginas" style="width:100%;margin-bottom:16px;box-sizing:border-box;" />
+
+<p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;">Área</p>
+<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+  <span style="font-size:12px;padding:6px 12px;border-radius:16px;background:var(--surface-2);color:var(--text-secondary);border:0.5px solid var(--border);">Físico</span>
+  <span style="font-size:12px;padding:6px 12px;border-radius:16px;background:var(--surface-2);color:var(--text-secondary);border:0.5px solid var(--border);">Mental</span>
+  <span style="font-size:12px;padding:6px 12px;border-radius:16px;background:#1D9E75;color:#fff;">Personal</span>
+  <span style="font-size:12px;padding:6px 12px;border-radius:16px;background:var(--surface-2);color:var(--text-secondary);border:0.5px solid var(--border);">Laboral</span>
+</div>
+
+<p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;">Tipo</p>
+<div style="display:flex;background:var(--surface-2);border-radius:var(--radius);padding:2px;margin-bottom:16px;">
+  <span style="flex:1;text-align:center;font-size:12px;padding:7px 0;border-radius:6px;color:var(--text-muted);">Sí / no</span>
+  <span style="flex:1;text-align:center;font-size:12px;padding:7px 0;border-radius:6px;background:var(--fill-accent);color:var(--on-accent);font-weight:500;">Cantidad</span>
+  <span style="flex:1;text-align:center;font-size:12px;padding:7px 0;border-radius:6px;color:var(--text-muted);">Duración</span>
+  <span style="flex:1;text-align:center;font-size:12px;padding:7px 0;border-radius:6px;color:var(--text-muted);">Escala</span>
+</div>
+
+<div style="display:flex;gap:10px;margin-bottom:16px;">
+  <div style="flex:1;">
+    <p style="font-size:12px;color:var(--text-secondary);margin:0 0 6px;">Meta</p>
+    <input type="number" value="20" style="width:100%;box-sizing:border-box;" />
+  </div>
+  <div style="flex:1;">
+    <p style="font-size:12px;color:var(--text-secondary);margin:0 0 6px;">Unidad</p>
+    <select style="width:100%;box-sizing:border-box;">
+      <option>páginas</option>
+      <option>litros</option>
+      <option>minutos</option>
+    </select>
+  </div>
+</div>
+
+<p style="font-size:12px;color:var(--text-secondary);margin:0 0 8px;">Frecuencia</p>
+<div style="display:flex;justify-content:space-between;margin-bottom:18px;">
+  <div style="width:30px;height:30px;border-radius:50%;background:var(--fill-accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:12px;">L</div>
+  <div style="width:30px;height:30px;border-radius:50%;background:var(--fill-accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:12px;">M</div>
+  <div style="width:30px;height:30px;border-radius:50%;background:var(--fill-accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:12px;">M</div>
+  <div style="width:30px;height:30px;border-radius:50%;background:var(--fill-accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:12px;">J</div>
+  <div style="width:30px;height:30px;border-radius:50%;background:var(--fill-accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:12px;">V</div>
+  <div style="width:30px;height:30px;border-radius:50%;background:var(--fill-accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:12px;">S</div>
+  <div style="width:30px;height:30px;border-radius:50%;background:var(--fill-accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;font-size:12px;">D</div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding:12px;background:var(--surface-2);border-radius:12px;">
+  <div>
+    <p style="font-size:13px;margin:0;">Vincular a bloque de rutina</p>
+    <p style="font-size:11px;color:var(--text-muted);margin:2px 0 0;">Opcional · se marca solo al completar el bloque</p>
+  </div>
+  <div style="width:34px;height:20px;border-radius:10px;background:var(--border-strong);position:relative;flex-shrink:0;"><div style="width:16px;height:16px;border-radius:50%;background:var(--surface-2);position:absolute;top:2px;left:2px;"></div></div>
+</div>
+
+<button style="width:100%;background:var(--fill-accent);color:var(--on-accent);border:none;">Crear hábito</button>
+
+</div>
