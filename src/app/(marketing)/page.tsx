@@ -3,6 +3,7 @@ import { LandingNav } from "@/components/landing/LandingNav";
 import { PrimeSequence } from "@/components/landing/PrimeSequence";
 import { ScrollReveal } from "@/components/landing/ScrollReveal";
 import { WaitlistForm } from "@/components/landing/WaitlistForm";
+import { PrimeMark } from "@/components/ui/PrimeMark";
 
 export default function LandingPage() {
   return (
@@ -23,7 +24,7 @@ export default function LandingPage() {
         </div>
 
         <h1>
-          Encontrá tu <span className="prime-word">prime</span>.
+          Alcanzá tu <span className="prime-word">prime</span>.
         </h1>
         <p className="sub">
           La app que organiza tu rutina diaria y mide tu progreso real — físico,
@@ -229,6 +230,7 @@ export default function LandingPage() {
       <footer>
         <div className="footer-inner">
           <span className="logo" style={{ fontSize: "18px" }}>
+            <PrimeMark size={20} />
             prime
           </span>
           <div className="footer-links">

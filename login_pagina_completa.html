@@ -1,0 +1,46 @@
+<style>
+.brand-panel{--c-bg:#FAECE7;--c-fg:#4A1B0C;--c-line:#D85A30}
+@media (prefers-color-scheme: dark){
+.brand-panel{--c-bg:#712B13;--c-fg:#F5C4B3;--c-line:#F0997B}
+}
+</style>
+<h2 class="sr-only">Página completa de login: fondo de página con la tarjeta de login centrada y footer con links legales</h2>
+<div style="background:var(--surface-1);border-radius:12px;padding:70px 24px 40px;display:flex;flex-direction:column;align-items:center;">
+
+<div style="display:flex;border:0.5px solid var(--border);border-radius:16px;overflow:hidden;max-width:640px;width:100%;margin-bottom:24px;">
+
+  <div class="brand-panel" style="background:var(--c-bg);width:240px;flex-shrink:0;padding:32px 26px;display:flex;flex-direction:column;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:56px;">
+      <svg viewBox="16 0 68 84" width="18" height="18"><polygon points="24,78 76,78 50,18" fill="var(--c-line)"/><circle cx="50" cy="9" r="5" fill="var(--c-fg)"/></svg>
+      <span style="font-family:var(--font-voice);font-size:17px;color:var(--c-fg);">prime</span>
+    </div>
+    <p style="font-family:var(--font-voice);font-style:italic;font-size:22px;line-height:1.35;color:var(--c-fg);margin:0 0 12px;">"La disciplina de hoy es la libertad de mañana."</p>
+    <p style="font-size:12px;color:var(--c-fg);opacity:0.7;margin:0 0 auto;">se personaliza desde tu perfil</p>
+    <div style="display:flex;gap:6px;margin-top:40px;">
+      <span style="width:7px;height:7px;border-radius:50%;background:#D85A30;"></span>
+      <span style="width:7px;height:7px;border-radius:50%;background:#7F77DD;"></span>
+      <span style="width:7px;height:7px;border-radius:50%;background:#1D9E75;"></span>
+      <span style="width:7px;height:7px;border-radius:50%;background:#BA7517;"></span>
+    </div>
+  </div>
+
+  <div style="background:var(--surface-2);flex:1;padding:36px 32px;">
+    <h1 style="font-family:var(--font-voice);font-size:24px;font-weight:500;margin:0 0 6px;">Bienvenido de nuevo</h1>
+    <p style="font-size:14px;color:var(--text-secondary);margin:0 0 28px;">Organizá tu día y seguí tu progreso.</p>
+
+    <label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px;">Email</label>
+    <input type="email" placeholder="nombre@email.com" style="width:100%;margin-bottom:18px;box-sizing:border-box;" />
+
+    <label style="font-size:13px;color:var(--text-secondary);display:block;margin-bottom:6px;">Contraseña</label>
+    <input type="password" placeholder="••••••••" style="width:100%;margin-bottom:24px;box-sizing:border-box;" />
+
+    <button style="width:100%;background:var(--fill-accent);color:var(--on-accent);border:none;margin-bottom:18px;">Entrar</button>
+
+    <p style="text-align:center;font-size:13px;color:var(--text-secondary);margin:0;">¿No tenés cuenta? <a href="#" style="color:var(--text-accent);">Registrate</a></p>
+  </div>
+
+</div>
+
+<p style="font-size:12px;color:var(--text-muted);margin:0;">prime · <a href="#" style="color:var(--text-muted);">Términos</a> · <a href="#" style="color:var(--text-muted);">Privacidad</a></p>
+
+</div>

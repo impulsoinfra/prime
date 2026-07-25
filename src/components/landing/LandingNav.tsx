@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { PrimeMark } from "./PrimeMark";
+import { PrimeMark } from "@/components/ui/PrimeMark";
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);

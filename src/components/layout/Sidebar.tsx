@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { PrimeMark } from "@/components/ui/PrimeMark";
 import { NAV_ITEMS } from "./nav-items";
 import { UserChip } from "./UserChip";
 
@@ -20,10 +21,12 @@ export function Sidebar({
 
   return (
     <aside className="sticky top-0 hidden h-dvh shrink-0 flex-col border-r border-border bg-surface-1 px-3 py-5 md:flex md:w-16 lg:w-[220px] lg:px-4">
-      <p className="font-voice mb-6 px-1 text-[20px] leading-none">
-        <span className="hidden lg:inline">prime</span>
-        <span className="lg:hidden">p</span>
-      </p>
+      <div className="mb-6 flex items-center justify-center gap-2 px-1 lg:justify-start">
+        <PrimeMark size={22} />
+        <span className="font-voice hidden text-[20px] leading-none lg:inline">
+          prime
+        </span>
+      </div>
 
       <nav className="flex flex-col gap-1">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { signIn, signUp, type AuthState } from "@/actions/auth";
+import { inputClass } from "@/components/ui/form";
 
 type Mode = "login" | "signup";
 
@@ -13,32 +14,31 @@ export function AuthForm({
   mode: Mode;
   message?: string;
 }) {
-  const action = mode === "login" ? signIn : signUp;
+  const esLogin = mode === "login";
+  const action = esLogin ? signIn : signUp;
   const [state, formAction, pending] = useActionState<AuthState, FormData>(
     action,
     null,
   );
 
   return (
-    <form action={formAction} className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1.5">
-        <p className="text-[18px] font-medium">
-          {mode === "login" ? "Entrar a tu cuenta" : "Crear tu cuenta"}
-        </p>
-        <p className="text-[13px] text-fg-secondary">
-          {mode === "login"
-            ? "Organizá tu día y seguí tu progreso."
-            : "Empezá a medir tu progreso hacia tu prime."}
-        </p>
-      </div>
+    <form action={formAction} className="flex flex-col">
+      <h1 className="font-voice text-[24px] font-medium leading-none">
+        {esLogin ? "Bienvenido de nuevo" : "Creá tu cuenta"}
+      </h1>
+      <p className="mt-2 mb-7 text-[14px] text-fg-secondary">
+        {esLogin
+          ? "Organizá tu día y seguí tu progreso."
+          : "Empezá a medir tu progreso hacia tu prime."}
+      </p>
 
       {message ? (
-        <p className="rounded-[10px] bg-accent-bg px-3 py-2 text-[12px] text-accent">
+        <p className="mb-4 rounded-[10px] bg-accent-bg px-3 py-2 text-[12px] text-accent">
           {message}
         </p>
       ) : null}
 
-      {mode === "signup" ? (
+      {!esLogin ? (
         <Field label="Nombre" htmlFor="nombre">
           <input
             id="nombre"
@@ -58,7 +58,7 @@ export function AuthForm({
           type="email"
           required
           autoComplete="email"
-          placeholder="vos@ejemplo.com"
+          placeholder="nombre@email.com"
           className={inputClass}
         />
       </Field>
@@ -69,14 +69,14 @@ export function AuthForm({
           name="password"
           type="password"
           required
-          autoComplete={mode === "login" ? "current-password" : "new-password"}
+          autoComplete={esLogin ? "current-password" : "new-password"}
           placeholder="••••••••"
           className={inputClass}
         />
       </Field>
 
       {state?.error ? (
-        <p className="text-[12px] text-danger" role="alert">
+        <p className="mb-4 text-[12px] text-danger" role="alert">
           {state.error}
         </p>
       ) : null}
@@ -84,17 +84,13 @@ export function AuthForm({
       <button
         type="submit"
         disabled={pending}
-        className="mt-1 w-full rounded-[10px] bg-accent px-3 py-2.5 text-[13px] font-medium text-accent-fg transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="w-full rounded-[10px] bg-accent px-3 py-3 text-[14px] font-medium text-accent-fg transition-opacity hover:opacity-90 disabled:opacity-60"
       >
-        {pending
-          ? "Un momento…"
-          : mode === "login"
-            ? "Entrar"
-            : "Crear cuenta"}
+        {pending ? "Un momento…" : esLogin ? "Entrar" : "Crear cuenta"}
       </button>
 
-      <p className="text-center text-[12px] text-fg-secondary">
-        {mode === "login" ? (
+      <p className="mt-4 text-center text-[13px] text-fg-secondary">
+        {esLogin ? (
           <>
             ¿No tenés cuenta?{" "}
             <Link href="/signup" className="text-accent hover:underline">
@@ -114,9 +110,6 @@ export function AuthForm({
   );
 }
 
-const inputClass =
-  "w-full rounded-[10px] border border-border bg-surface-1 px-3 py-2.5 text-[13px] text-fg outline-none transition-colors placeholder:text-fg-muted focus:border-accent";
-
 function Field({
   label,
   htmlFor,
@@ -127,8 +120,8 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label htmlFor={htmlFor} className="flex flex-col gap-1.5">
-      <span className="text-[12px] text-fg-secondary">{label}</span>
+    <label htmlFor={htmlFor} className="mb-[18px] block">
+      <span className="mb-1.5 block text-[13px] text-fg-secondary">{label}</span>
       {children}
     </label>
   );

@@ -9,7 +9,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Prime — Encontrá tu prime",
+  title: "Prime — Alcanzá tu prime",
   description:
     "La app que organiza tu rutina diaria y mide tu progreso real — físico, mental, personal y laboral — en un solo lugar.",
 };
