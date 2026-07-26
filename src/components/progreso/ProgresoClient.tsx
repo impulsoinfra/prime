@@ -100,7 +100,7 @@ export function ProgresoClient({
         </div>
       </div>
 
-      <div className="mb-5 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <div className="mb-5 flex flex-col gap-6 lg:grid lg:grid-cols-[1.4fr_1fr]">
         <MonthCalendar
           label={mesAnioLabel(ym.year, ym.month)}
           celdas={data.celdas}

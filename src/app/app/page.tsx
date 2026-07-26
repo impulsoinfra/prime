@@ -48,7 +48,7 @@ export default async function HoyPage() {
         semanal={vm.semanal}
       />
 
-      <div className="mb-5 grid gap-5 lg:grid-cols-[1.2fr_1fr]">
+      <div className="mb-5 flex flex-col gap-5 lg:grid lg:grid-cols-[1.2fr_1fr]">
         <div>
           <div className="mb-4">
             <AhoraCard bloques={vm.bloques} serverNowMin={vm.serverNowMin} />

@@ -136,7 +136,7 @@ export function RutinaClient({
         })}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
+      <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[1.6fr_1fr]">
         {/* Bloques del día */}
         <div>
           <SectionTitle>Bloques del día</SectionTitle>
