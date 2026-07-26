@@ -15,16 +15,21 @@ export default async function HoyPage() {
   const dia = getDiaSemana(hoy);
   const desde = toISODate(addDays(hoy, -40)); // ventana para métricas/rachas
 
-  const [areasRes, habitosRes, registrosRes, bloquesRes] = await Promise.all([
-    supabase.from("areas").select("*").order("orden"),
-    supabase.from("habitos").select("*").eq("activo", true).order("created_at"),
-    supabase.from("registros").select("*").gte("fecha", desde),
-    supabase
-      .from("rutina_bloques")
-      .select("*")
-      .eq("dia_semana", dia)
-      .order("hora_inicio"),
-  ]);
+  const [userRes, areasRes, habitosRes, registrosRes, bloquesRes] =
+    await Promise.all([
+      supabase.auth.getUser(),
+      supabase.from("areas").select("*").order("orden"),
+      supabase.from("habitos").select("*").eq("activo", true).order("created_at"),
+      supabase.from("registros").select("*").gte("fecha", desde),
+      supabase
+        .from("rutina_bloques")
+        .select("*")
+        .eq("dia_semana", dia)
+        .order("hora_inicio"),
+    ]);
+
+  const nombre =
+    (userRes.data.user?.user_metadata?.nombre as string | undefined) ?? "";
 
   const vm = buildHoy({
     areas: areasRes.data ?? [],
@@ -36,7 +41,7 @@ export default async function HoyPage() {
 
   return (
     <>
-      <Greeting />
+      <Greeting nombre={nombre} />
       <MetricsRow
         progreso={vm.progreso}
         racha={vm.racha}
@@ -52,7 +57,6 @@ export default async function HoyPage() {
           <DayTimeline bloques={vm.bloques} nowMin={vm.serverNowMin} />
         </div>
         <div>
-          <SectionTitle>Progreso por área</SectionTitle>
           <AreaProgressGrid areas={vm.areas} />
         </div>
       </div>

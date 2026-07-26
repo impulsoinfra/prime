@@ -44,12 +44,12 @@ export function mesAnioLabel(year: number, month: number): string {
   return `${m.charAt(0).toUpperCase()}${m.slice(1)} ${year}`;
 }
 
-/** Saludo según la hora del día. */
+/** Saludo según la hora del día (sin nombre). */
 export function saludo(date: Date = new Date()): string {
   const h = date.getHours();
-  if (h < 12) return "Hola, buenos días";
-  if (h < 20) return "Hola, buenas tardes";
-  return "Hola, buenas noches";
+  if (h < 12) return "Buenos días";
+  if (h < 20) return "Buenas tardes";
+  return "Buenas noches";
 }
 
 /** Fecha local en formato YYYY-MM-DD (para registros.fecha). No usa UTC. */

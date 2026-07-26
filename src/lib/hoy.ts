@@ -43,7 +43,10 @@ export type AreaProgresoVM = {
   slug: AreaSlug;
   label: string;
   dias: (number | null)[];
-  pct: number;
+  pct: number; // % semanal
+  hoyCumplidos: number;
+  hoyTotal: number;
+  hoyPct: number;
   tieneHabitos: boolean;
 };
 
@@ -93,11 +96,21 @@ export function buildHoy(input: {
     const slug = areaSlug(a);
     const habitosArea = habitos.filter((h) => h.area_id === a.id);
     const { dias, pct } = semanaArea(habitosArea, registros, hoy);
+
+    const habitosHoy = habitosArea.filter((h) => isProgramadoEn(h, hoy));
+    const hoyCumplidos = habitosHoy.filter((h) =>
+      isCumplido(h, valoresHoy.get(h.id) ?? 0),
+    ).length;
+    const hoyTotal = habitosHoy.length;
+
     return {
       slug,
       label: AREA_LABEL[slug],
       dias,
       pct,
+      hoyCumplidos,
+      hoyTotal,
+      hoyPct: hoyTotal > 0 ? Math.round((hoyCumplidos / hoyTotal) * 100) : 0,
       tieneHabitos: habitosArea.length > 0,
     };
   });
