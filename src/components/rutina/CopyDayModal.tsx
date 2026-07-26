@@ -36,6 +36,10 @@ export function CopyDayModal({
     setDestinos([0, 1, 2, 3, 4].filter((d) => d !== diaOrigen));
   }
 
+  function preseleccionarTodos() {
+    setDestinos([0, 1, 2, 3, 4, 5, 6].filter((d) => d !== diaOrigen));
+  }
+
   function copiar() {
     if (destinos.length === 0) return setError("Elegí al menos un día.");
     setError(null);
@@ -85,13 +89,22 @@ export function CopyDayModal({
           })}
         </div>
 
-        <button
-          type="button"
-          onClick={preseleccionarLV}
-          className="self-start text-[12px] text-accent"
-        >
-          Seleccionar Lun–Vie
-        </button>
+        <div className="flex gap-4">
+          <button
+            type="button"
+            onClick={preseleccionarLV}
+            className="text-[12px] text-accent"
+          >
+            Lun–Vie
+          </button>
+          <button
+            type="button"
+            onClick={preseleccionarTodos}
+            className="text-[12px] text-accent"
+          >
+            Toda la semana
+          </button>
+        </div>
 
         {error ? <p className="text-[12px] text-danger">{error}</p> : null}
 

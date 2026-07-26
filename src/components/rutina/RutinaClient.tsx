@@ -1,7 +1,8 @@
 "use client";
 
 import { IconChevronRight, IconPlus } from "@tabler/icons-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { vaciarDia } from "@/actions/rutina";
 import { areaSlug } from "@/lib/areas";
 import {
   addDays,
@@ -24,6 +25,16 @@ type ModalState =
   | { tipo: "copiar" }
   | null;
 
+const DIA_NOMBRE = [
+  "Lunes",
+  "Martes",
+  "Miércoles",
+  "Jueves",
+  "Viernes",
+  "Sábado",
+  "Domingo",
+];
+
 function metaTexto(h: Habito): string {
   if (h.tipo === "booleano") return "Sí / no";
   if (h.tipo === "escala") return "Escala 1–5";
@@ -42,6 +53,7 @@ export function RutinaClient({
   const hoy = new Date();
   const [selectedDia, setSelectedDia] = useState(getDiaSemana(hoy));
   const [modal, setModal] = useState<ModalState>(null);
+  const [pending, startTransition] = useTransition();
 
   const lunes = startOfWeek(hoy);
   const areaById = new Map(areas.map((a) => [a.id, a]));
@@ -52,17 +64,44 @@ export function RutinaClient({
 
   const objetivos = habitos.filter((h) => h.bloque_id == null);
 
+  function vaciar() {
+    if (bloquesDelDia.length === 0) return;
+    if (
+      !confirm(
+        `¿Vaciar la rutina del ${DIA_NOMBRE[selectedDia]}? Se borran sus ${bloquesDelDia.length} bloque(s).`,
+      )
+    )
+      return;
+    startTransition(async () => {
+      try {
+        await vaciarDia(selectedDia);
+      } catch (e) {
+        alert(e instanceof Error ? e.message : "Error al vaciar.");
+      }
+    });
+  }
+
   return (
     <>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-[18px] font-medium">Rutina</h1>
-        <button
-          type="button"
-          onClick={() => setModal({ tipo: "copiar" })}
-          className="text-[12px] text-accent"
-        >
-          Copiar día
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={() => setModal({ tipo: "copiar" })}
+            className="text-[12px] text-accent"
+          >
+            Copiar día
+          </button>
+          <button
+            type="button"
+            onClick={vaciar}
+            disabled={pending || bloquesDelDia.length === 0}
+            className="text-[12px] text-danger disabled:opacity-40"
+          >
+            {pending ? "Vaciando…" : "Vaciar día"}
+          </button>
+        </div>
       </div>
 
       {/* Selector de día */}

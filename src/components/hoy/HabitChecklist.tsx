@@ -57,7 +57,7 @@ export function HabitChecklist({ habitos }: { habitos: HabitoVM[] }) {
   if (optimistas.length === 0) {
     return (
       <p className="rounded-[12px] border border-dashed border-border-strong bg-surface-2 px-4 py-6 text-center text-[13px] text-fg-muted">
-        No tenés hábitos para hoy. Agregalos desde Rutina.
+        No tenés objetivos para hoy. Agregalos desde Rutina.
       </p>
     );
   }

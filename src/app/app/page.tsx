@@ -57,7 +57,7 @@ export default async function HoyPage() {
         </div>
       </div>
 
-      <SectionTitle>Hábitos de hoy</SectionTitle>
+      <SectionTitle>Objetivos de hoy</SectionTitle>
       <HabitChecklist habitos={vm.habitos} />
     </>
   );

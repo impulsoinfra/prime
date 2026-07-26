@@ -55,6 +55,18 @@ export async function eliminarBloque(id: string): Promise<void> {
   revalidar();
 }
 
+/** Vacía un día: borra todos sus bloques de rutina. */
+export async function vaciarDia(dia: number): Promise<void> {
+  const { supabase, userId } = await ctx();
+  const { error } = await supabase
+    .from("rutina_bloques")
+    .delete()
+    .eq("user_id", userId)
+    .eq("dia_semana", dia);
+  if (error) throw new Error(error.message);
+  revalidar();
+}
+
 /** Copia los bloques del día origen a los días destino, reemplazando lo que hubiera. */
 export async function copiarDiaA(
   diaOrigen: number,
