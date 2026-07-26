@@ -153,35 +153,37 @@ export function mejorRacha(
   return best;
 }
 
-/** Serie semanal por área (lunes→domingo): true=cumplido, false=no, null=no programado. */
+/** Serie semanal por área (lunes→domingo). Cada día es el ratio de objetivos
+ *  del área cumplidos ese día (0–1), o null si no había objetivos / es futuro.
+ *  `pct` = promedio semanal (sobre los días transcurridos con objetivos). */
 export function semanaArea(
   habitosDelArea: Habito[],
   registros: Registro[],
   hoy: Date = new Date(),
-): { dias: (boolean | null)[]; cumplidos: number; total: number } {
+): { dias: (number | null)[]; pct: number } {
   const lunes = startOfWeek(hoy);
-  const dias: (boolean | null)[] = [];
-  let cumplidos = 0;
-  let total = 0;
+  const dias: (number | null)[] = [];
+  let suma = 0;
+  let nDias = 0;
 
   for (let i = 0; i < 7; i++) {
     const day = addDays(lunes, i);
     const programados = habitosDelArea.filter((h) => isProgramadoEn(h, day));
-    if (programados.length === 0) {
+    const esFuturo = day > hoy && !isSameDay(day, hoy);
+    if (programados.length === 0 || esFuturo) {
       dias.push(null);
       continue;
     }
-    total++;
-    const esFuturo = day > hoy && !isSameDay(day, hoy);
-    if (esFuturo) {
-      dias.push(false);
-      continue;
-    }
     const valores = valoresDe(registros, toISODate(day));
-    const met = programados.every((h) => isCumplido(h, valores.get(h.id) ?? 0));
-    dias.push(met);
-    if (met) cumplidos++;
+    const cumplidos = programados.filter((h) =>
+      isCumplido(h, valores.get(h.id) ?? 0),
+    ).length;
+    const ratio = cumplidos / programados.length;
+    dias.push(ratio);
+    suma += ratio;
+    nDias++;
   }
 
-  return { dias, cumplidos, total };
+  const pct = nDias === 0 ? 0 : Math.round((suma / nDias) * 100);
+  return { dias, pct };
 }

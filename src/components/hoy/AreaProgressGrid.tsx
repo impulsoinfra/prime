@@ -21,7 +21,7 @@ export function AreaProgressGrid({ areas }: { areas: AreaProgresoVM[] }) {
               {a.label}
               <span className="opacity-75">
                 {" · "}
-                {a.total > 0 ? `${a.cumplidos}/${a.total}` : "—"}
+                {a.tieneHabitos ? `${a.pct}%` : "—"}
               </span>
             </p>
             <SegmentedWeekBar dias={a.dias} />

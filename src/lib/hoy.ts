@@ -42,9 +42,9 @@ export type HabitoVM = {
 export type AreaProgresoVM = {
   slug: AreaSlug;
   label: string;
-  dias: (boolean | null)[];
-  cumplidos: number;
-  total: number;
+  dias: (number | null)[];
+  pct: number;
+  tieneHabitos: boolean;
 };
 
 export type HoyVM = {
@@ -92,8 +92,14 @@ export function buildHoy(input: {
   const areasVM: AreaProgresoVM[] = areas.map((a) => {
     const slug = areaSlug(a);
     const habitosArea = habitos.filter((h) => h.area_id === a.id);
-    const { dias, cumplidos, total } = semanaArea(habitosArea, registros, hoy);
-    return { slug, label: AREA_LABEL[slug], dias, cumplidos, total };
+    const { dias, pct } = semanaArea(habitosArea, registros, hoy);
+    return {
+      slug,
+      label: AREA_LABEL[slug],
+      dias,
+      pct,
+      tieneHabitos: habitosArea.length > 0,
+    };
   });
 
   const habitosVM: HabitoVM[] = habitos
