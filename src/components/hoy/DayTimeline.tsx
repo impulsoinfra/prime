@@ -19,8 +19,9 @@ export function DayTimeline({
   }
 
   return (
-    <div className="flex gap-2 overflow-x-auto pb-1">
-      {bloques.map((b) => {
+    <div className="relative">
+      <div className="flex gap-2 overflow-x-auto pb-1">
+        {bloques.map((b) => {
         const start = timeToMinutes(b.horaInicio);
         const end = b.horaFin ? timeToMinutes(b.horaFin) : start;
         const activo = b.horaFin != null && start <= nowMin && nowMin < end;
@@ -50,7 +51,14 @@ export function DayTimeline({
             <span className="sr-only">{b.titulo}</span>
           </div>
         );
-      })}
+        })}
+      </div>
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-8"
+        style={{
+          background: "linear-gradient(to right, transparent, var(--surface-1))",
+        }}
+      />
     </div>
   );
 }

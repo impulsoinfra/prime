@@ -51,9 +51,11 @@ export function AhoraCard({
         </p>
       )}
 
-      <div className="mt-2.5 flex items-center justify-between border-t border-border pt-2.5">
-        <span className="text-[12px] text-fg-muted">A continuación</span>
-        <span className="text-[13px]">
+      <div className="mt-2.5 flex items-center gap-3 border-t border-border pt-2.5">
+        <span className="shrink-0 text-[12px] text-fg-muted">
+          A continuación
+        </span>
+        <span className="min-w-0 flex-1 truncate text-right text-[13px]">
           {proximo
             ? `${formatHora(proximo.horaInicio)} · ${proximo.titulo}`
             : "—"}
