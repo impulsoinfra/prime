@@ -1,7 +1,8 @@
 "use client";
 
+import { IconEye, IconEyeOff } from "@tabler/icons-react";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { signIn, signUp, type AuthState } from "@/actions/auth";
 import { inputClass } from "@/components/ui/form";
 
@@ -20,6 +21,7 @@ export function AuthForm({
     action,
     null,
   );
+  const [verClave, setVerClave] = useState(false);
 
   return (
     <form action={formAction} className="flex flex-col">
@@ -64,15 +66,30 @@ export function AuthForm({
       </Field>
 
       <Field label="Contraseña" htmlFor="password">
-        <input
-          id="password"
-          name="password"
-          type="password"
-          required
-          autoComplete={esLogin ? "current-password" : "new-password"}
-          placeholder="••••••••"
-          className={inputClass}
-        />
+        <div className="relative">
+          <input
+            id="password"
+            name="password"
+            type={verClave ? "text" : "password"}
+            required
+            autoComplete={esLogin ? "current-password" : "new-password"}
+            placeholder="••••••••"
+            className={`${inputClass} pr-10`}
+          />
+          <button
+            type="button"
+            onClick={() => setVerClave((v) => !v)}
+            aria-label={verClave ? "Ocultar contraseña" : "Mostrar contraseña"}
+            aria-pressed={verClave}
+            className="absolute top-1/2 right-2.5 flex size-7 -translate-y-1/2 items-center justify-center rounded-full text-fg-muted transition-colors hover:text-fg-secondary"
+          >
+            {verClave ? (
+              <IconEyeOff size={18} aria-hidden />
+            ) : (
+              <IconEye size={18} aria-hidden />
+            )}
+          </button>
+        </div>
       </Field>
 
       {state?.error ? (
