@@ -35,6 +35,20 @@ const DIA_NOMBRE = [
   "Domingo",
 ];
 
+const DIAS_MINI = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+
+function frecuenciaTexto(freq: number[]): string {
+  const s = [...freq].sort((a, b) => a - b).join(",");
+  if (freq.length === 7) return "Todos los días";
+  if (s === "0,1,2,3,4") return "Lun a Vie";
+  if (s === "5,6") return "Fines de semana";
+  if (freq.length === 0) return "Sin días";
+  return [...freq]
+    .sort((a, b) => a - b)
+    .map((d) => DIAS_MINI[d])
+    .join(" · ");
+}
+
 function metaTexto(h: Habito): string {
   if (h.tipo === "booleano") return "Sí / no";
   if (h.tipo === "escala") return "Escala 1–5";
@@ -62,7 +76,9 @@ export function RutinaClient({
     .filter((b) => b.dia_semana === selectedDia)
     .sort((a, b) => a.hora_inicio.localeCompare(b.hora_inicio));
 
-  const objetivos = habitos.filter((h) => h.bloque_id == null);
+  const objetivos = habitos.filter(
+    (h) => h.bloque_id == null && h.frecuencia.includes(selectedDia),
+  );
 
   function vaciar() {
     if (bloquesDelDia.length === 0) return;
@@ -195,12 +211,12 @@ export function RutinaClient({
         <div>
           <SectionTitle>Objetivos sin horario</SectionTitle>
           <p className="mt-[-4px] mb-2 text-[11px] text-fg-muted">
-            Se cumplen en cualquier momento
+            Se cumplen en cualquier momento del día
           </p>
           <div className="flex flex-col gap-2">
             {objetivos.length === 0 ? (
               <p className="py-2 text-[13px] text-fg-muted">
-                No hay objetivos sin horario.
+                No hay objetivos para este día.
               </p>
             ) : (
               objetivos.map((h) => {
@@ -227,7 +243,7 @@ export function RutinaClient({
                     </div>
                     <p className="mt-1.5 text-[13px]">{h.nombre}</p>
                     <p className="mt-0.5 text-[11px] text-fg-muted">
-                      {metaTexto(h)}
+                      {metaTexto(h)} · {frecuenciaTexto(h.frecuencia)}
                     </p>
                   </button>
                 );
